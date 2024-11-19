@@ -1,17 +1,33 @@
-<<<<<<< HEAD
-# my-waste-classification-web
-A user-friendly web application for waste classification, powered by a trained TensorFlow deep learning model. Users can upload images of waste items, and the app will predict the type of waste (e.g., plastic, glass, metal) using the deep learning model.
-=======
-# Waste Classification Project
+# My Waste Classification Web
 
-## Description
-This project builds a machine learning model to classify waste into categories such as paper, plastic, metal, glass, and others.
+A user-friendly web application for waste classification, powered by a trained TensorFlow deep learning model. Users can upload images of waste items, and the app will predict the type of waste (e.g., paper, plastic, metal, glass, and others).
 
+## Features
+- **Upload Waste Images:** Users can upload images, and the app will classify them into predefined waste categories.
+- **Leaderboard:** Track user points based on successful classifications.
+- **Admin Dashboard:** Manage users, view activities, and monitor app usage.
+- **History:** View user activity history.
+
+## Requirements
+- Python 3.7 or later
+- TensorFlow, Flask, SQLAlchemy, and other dependencies listed in `requirements.txt`
+
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ThinhPhan0108/my-waste-classification-web.git
+2. **Navigate to the project directory:**
+   ```bash
+   cd my-waste-classification-web
+4. **Install the required dependencies:**
+   ```bash
+   pip install -r requirements.txt
+5. ***Run the application:***
+   ```bash
+   python app.py
+   
 ## Dataset
-The dataset is stored on Google Drive. If you want to download the dataset:
-1. Install the required libraries from `requirements.txt`.
-2. Run the `download_data.py` script to download and extract the dataset automatically.
+The dataset used for training the model consists of categorized images of waste items. You can customize the model by retraining it with your dataset.
 
 ## License
 This project is licensed under the MIT License.
->>>>>>> e38fbaee9cbb958e7919c4c6579f092a5bb74026
