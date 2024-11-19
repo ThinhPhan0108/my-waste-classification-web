@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center text-primary">Đăng ký</h1>
+        <form method="POST" class="mt-4 mx-auto" style="max-width: 400px;">
+            <div class="mb-3">
+                <input type="text" name="username" class="form-control" placeholder="Tên tài khoản" required>
+            </div>
+            <div class="mb-3">
+                <input type="email" name="email" class="form-control" placeholder="Email">
+            </div>
+            <div class="mb-3">
+                <input type="text" name="phone" class="form-control" placeholder="Số điện thoại">
+            </div>
+            <div class="mb-3">
+                <input type="text" name="address" class="form-control" placeholder="Địa chỉ">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
+        </form>
+        <p class="text-center mt-3">
+            <a href="/login">Đã có tài khoản? Đăng nhập</a>
+        </p>
+    </div>
+</body>
+</html>

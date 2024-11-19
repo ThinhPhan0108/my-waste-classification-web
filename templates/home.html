@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Trang Chủ{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Chào mừng đến với Hệ Thống Phân Loại Rác Thải</h1>
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-outline-primary btn-lg m-2">Phân loại rác</a>
+        <a href="/leaderboard" class="btn btn-outline-success btn-lg m-2">Bảng xếp hạng</a>
+        <a href="/history" class="btn btn-outline-info btn-lg m-2">Lịch sử sử dụng</a>
+        {% if is_admin %}
+            <a href="/admin" class="btn btn-outline-danger btn-lg m-2">Quản trị</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

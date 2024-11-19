@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Phân Loại Rác{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Phân loại rác thải</h1>
+    <form method="POST" enctype="multipart/form-data" class="mt-4 mx-auto" style="max-width: 400px;">
+        <div class="mb-3">
+            <input type="file" name="file" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Phân loại</button>
+    </form>
+</div>
+{% endblock %}
