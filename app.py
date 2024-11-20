@@ -13,24 +13,21 @@ import base64
 from datetime import datetime
 import os
 import requests
+import gdown
 
 def download_model():
-    url = "https://drive.google.com/uc?id=1rtxHkF5zr6nuqOwVGkcZwDowgArZnhLH"  # Link tải file từ Google Drive
-    output = "model.h5" 
-
-    if not os.path.exists(output):  # Kiểm tra nếu file chưa tồn tại
-        print("Downloading model file...")
-        response = requests.get(url, stream=True)
-        if response.status_code == 200:
-            with open(output, "wb") as file:
-                for chunk in response.iter_content(chunk_size=1024):
-                    if chunk:
-                        file.write(chunk)
-            print("Model downloaded successfully.")
-        else:
-            print(f"Failed to download model. HTTP Status Code: {response.status_code}")
+    url = "https://drive.google.com/uc?id=1rtxHkF5zr6nuqOwVGkcZwDowgArZnhLH"
+    output = "model.h5"
+    if not os.path.exists(output):  # Kiểm tra xem file đã tồn tại chưa
+        print("Downloading model...")
+        gdown.download(url, output, quiet=False)
+        print("Model downloaded successfully!")
     else:
-        print("Model file already exists.")
+        print("Model already exists.")
+
+    # Kiểm tra kích thước file sau khi tải xong
+    if os.path.exists(output):
+        print(f"Downloaded file size: {os.path.getsize(output)} bytes")
 
 
 # Setup logging
@@ -338,9 +335,20 @@ def admin_dashboard():
 
     return render_template('admin.html', users=users, customer_data=customer_data, activities=activities, is_admin=True)
 
+# Thay đổi trong phần khởi động ứng dụng
 if __name__ == "__main__":
-    download_model()  # Tải file model nếu chưa có
+    try:
+        download_model()  # Tải xuống mô hình trước
+        model = load_model("model.h5", custom_objects={"KerasLayer": hub.KerasLayer})  # Tải mô hình sau khi tải xuống
+        print("Model loaded successfully!")
+    except Exception as e:
+        print(f"Error initializing the application: {e}")
+        exit(1)
+
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
+
+
 
 
