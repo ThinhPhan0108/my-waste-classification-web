@@ -11,6 +11,27 @@ import json
 import logging
 import base64
 from datetime import datetime
+import os
+import requests
+
+def download_model():
+    url = "https://drive.google.com/uc?id=1rtxHkF5zr6nuqOwVGkcZwDowgArZnhLH"  # Link tải file từ Google Drive
+    output = "model.h5" 
+
+    if not os.path.exists(output):  # Kiểm tra nếu file chưa tồn tại
+        print("Downloading model file...")
+        response = requests.get(url, stream=True)
+        if response.status_code == 200:
+            with open(output, "wb") as file:
+                for chunk in response.iter_content(chunk_size=1024):
+                    if chunk:
+                        file.write(chunk)
+            print("Model downloaded successfully.")
+        else:
+            print(f"Failed to download model. HTTP Status Code: {response.status_code}")
+    else:
+        print("Model file already exists.")
+
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -318,5 +339,8 @@ def admin_dashboard():
     return render_template('admin.html', users=users, customer_data=customer_data, activities=activities, is_admin=True)
 
 if __name__ == "__main__":
+    download_model()  # Tải file model nếu chưa có
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
+
