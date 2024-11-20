@@ -2,12 +2,76 @@
 {% block title %}Phân Loại Rác{% endblock %}
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center text-primary">Phân loại rác thải</h1>
-    <form method="POST" enctype="multipart/form-data" class="mt-4 mx-auto" style="max-width: 400px;">
-        <div class="mb-3">
-            <input type="file" name="file" class="form-control" required>
+    <h1 class="text-center text-primary mb-4">Phân loại rác thải</h1>
+
+    <!-- Hướng dẫn -->
+    <p class="text-center text-muted">
+        Bạn có thể sử dụng camera để chụp ảnh rác trực tiếp hoặc tải ảnh rác từ thiết bị của mình để phân loại.
+    </p>
+
+    <!-- Phần chụp ảnh -->
+    <div class="text-center mb-5">
+        <h4 class="text-center mb-3">Chụp ảnh trực tiếp:</h4>
+        <div style="display: flex; justify-content: center;">
+            <video id="camera" autoplay playsinline 
+                style="width: 100%; max-width: 400px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);">
+            </video>
         </div>
-        <button type="submit" class="btn btn-success w-100">Phân loại</button>
-    </form>
+        <button id="capture" type="button" class="btn btn-primary mt-3">Chụp ảnh</button>
+        <canvas id="canvas" style="display: none;"></canvas>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Form upload ảnh -->
+    <div class="mt-4">
+        <h4 class="text-center mb-3">Hoặc tải lên file ảnh:</h4>
+        <form method="POST" action="/" enctype="multipart/form-data" class="mt-3">
+            <!-- Input ẩn lưu ảnh chụp -->
+            <input type="hidden" name="captured_image" id="captured_image">
+
+            <!-- Input upload file -->
+            <div class="mb-3">
+                <label for="fileInput" class="form-label">Chọn file ảnh:</label>
+                <input type="file" name="file" id="fileInput" class="form-control">
+            </div>
+            
+            <button type="submit" class="btn btn-success w-100">Phân loại</button>
+        </form>
+    </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const video = document.getElementById("camera");
+        const canvas = document.getElementById("canvas");
+        const captureButton = document.getElementById("capture");
+        const capturedImageInput = document.getElementById("captured_image");
+
+        // Bật camera
+        navigator.mediaDevices
+            .getUserMedia({ video: true })
+            .then((stream) => {
+                video.srcObject = stream;
+            })
+            .catch((err) => {
+                console.error("Lỗi khi mở camera:", err);
+                alert("Không thể truy cập camera!");
+            });
+
+        // Chụp ảnh
+        captureButton.addEventListener("click", () => {
+            const context = canvas.getContext("2d");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Lưu ảnh vào input ẩn
+            const imageData = canvas.toDataURL("image/png");
+            capturedImageInput.value = imageData;
+
+            alert("Ảnh đã được chụp!");
+        });
+    });
+</script>
 {% endblock %}

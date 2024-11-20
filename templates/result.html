@@ -7,5 +7,23 @@
     <div class="text-center">
         <img src="{{ image_url }}" alt="Uploaded Image" class="img-fluid mt-4" style="max-width: 300px;">
     </div>
+    
+    <!-- Hiển thị thông tin chi tiết -->
+    <div class="mt-4">
+        <h2 class="text-center text-success">Thông tin chi tiết:</h2>
+        <p class="text-center fs-5"><strong>Mô tả:</strong> {{ description }}</p>
+        <p class="text-center fs-5"><strong>Tác động môi trường:</strong> {{ environmental_impact }}</p>
+        <p class="text-center fs-5"><strong>Mẹo xử lý:</strong> {{ tips }}</p>
+    </div>
+
+    <!-- Hiển thị các trung tâm thu gom -->
+    <div class="mt-4">
+        <h3 class="text-center text-info">Trạm thu gom gần bạn:</h3>
+        <ul class="list-group">
+            {% for center in recycle_centers %}
+                <li class="list-group-item">{{ center }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}

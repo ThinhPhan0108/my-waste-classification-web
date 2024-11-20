@@ -1,0 +1,99 @@
+{
+    "battery": {
+        "description": "Pin cần được đưa đến các điểm thu gom tái chế hoặc xử lý an toàn. Không vứt vào thùng rác thông thường.",
+        "environmental_impact": "Pin chứa các hóa chất độc hại có thể gây ô nhiễm môi trường nếu không được xử lý đúng cách.",
+        "tips": "Lưu trữ pin cũ trong hộp kín và đưa đến các điểm thu gom định kỳ.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở A (59C Nguyễn Đình Chiểu, Quận 3)",
+            "Trạm thực hành xanh - Cơ sở B (279 Nguyễn Tri Phương, Quận 10)"
+        ]
+    },
+    "biological": {
+        "description": "Rác thải sinh học bao gồm thực phẩm thừa, lá cây và các chất hữu cơ khác.",
+        "environmental_impact": "Nếu không được xử lý đúng cách, rác thải sinh học có thể gây mùi hôi và thu hút côn trùng.",
+        "tips": "Phân loại rác thải sinh học để ủ phân compost hoặc đưa đến các điểm thu gom hữu cơ.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở H (1A Hoàng Diệu, Quận Phú Nhuận)"
+        ]
+    },
+    "brown-glass": {
+        "description": "Chai lọ thủy tinh màu nâu thường được sử dụng cho bia và một số loại đồ uống khác.",
+        "environmental_impact": "Thủy tinh không phân hủy sinh học nhưng có thể tái chế hoàn toàn.",
+        "tips": "Rửa sạch và phân loại theo màu sắc trước khi đưa đến điểm thu gom.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở E (54 Nguyễn Văn Thủ, Quận 1)"
+        ]
+    },
+    "cardboard": {
+        "description": "Thùng carton và các sản phẩm giấy bìa cứng.",
+        "environmental_impact": "Giấy bìa cứng có thể tái chế nhưng cần được phân loại và giữ khô ráo.",
+        "tips": "Gấp gọn và giữ khô trước khi đưa đến điểm thu gom.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở D (196 Trần Quang Khải, Quận 1)"
+        ]
+    },
+    "clothes": {
+        "description": "Quần áo cũ hoặc không sử dụng.",
+        "environmental_impact": "Quần áo không phân hủy nhanh và có thể gây ô nhiễm nếu đốt cháy.",
+        "tips": "Quyên góp cho tổ chức từ thiện hoặc tái chế thành sản phẩm khác.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở V (232/6 Võ Thị Sáu, Quận 3)"
+        ]
+    },
+    "green-glass": {
+        "description": "Chai lọ thủy tinh màu xanh lá cây.",
+        "environmental_impact": "Thủy tinh màu xanh có thể tái chế nhưng cần phân loại riêng.",
+        "tips": "Rửa sạch và phân loại theo màu sắc trước khi tái chế.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở N (17 Phạm Ngọc Thạch, Quận 3)"
+        ]
+    },
+    "metal": {
+        "description": "Các sản phẩm kim loại như lon nhôm, sắt thép.",
+        "environmental_impact": "Kim loại có thể tái chế nhiều lần mà không mất chất lượng.",
+        "tips": "Rửa sạch và nén lại để tiết kiệm không gian.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở A (59C Nguyễn Đình Chiểu, Quận 3)"
+        ]
+    },
+    "paper": {
+        "description": "Giấy in, giấy viết và các sản phẩm giấy khác.",
+        "environmental_impact": "Giấy có thể tái chế nhưng cần được phân loại và giữ khô ráo.",
+        "tips": "Không vò nát và giữ khô trước khi đưa đến điểm thu gom.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở B (279 Nguyễn Tri Phương, Quận 10)"
+        ]
+    },
+    "plastic": {
+        "description": "Các sản phẩm nhựa như chai nước, túi nylon.",
+        "environmental_impact": "Nhựa mất hàng trăm năm để phân hủy và gây hại lớn đến môi trường.",
+        "tips": "Rửa sạch và phân loại theo mã nhựa trước khi tái chế.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở H (1A Hoàng Diệu, Quận Phú Nhuận)"
+        ]
+    },
+    "shoes": {
+        "description": "Giày dép cũ hoặc hỏng.",
+        "environmental_impact": "Giày dép thường chứa nhiều vật liệu khó phân hủy.",
+        "tips": "Quyên góp nếu còn sử dụng được hoặc tái chế thành vật liệu khác.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở E (54 Nguyễn Văn Thủ, Quận 1)"
+        ]
+    },
+    "trash": {
+        "description": "Rác thải không thể tái chế.",
+        "environmental_impact": "Gây ô nhiễm môi trường và chiếm diện tích bãi rác.",
+        "tips": "Giảm thiểu sử dụng và phân loại đúng cách.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở D (196 Trần Quang Khải, Quận 1)"
+        ]
+    },
+    "white-glass": {
+        "description": "Chai lọ thủy tinh trong suốt.",
+        "environmental_impact": "Thủy tinh trong suốt có thể tái chế nhưng cần phân loại riêng.",
+        "tips": "Rửa sạch và phân loại theo màu sắc trước khi tái chế.",
+        "recycle_centers": [
+            "Trạm thực hành xanh - Cơ sở V (232/6 Võ Thị Sáu, Quận 3)"
+        ]
+    }
+}
