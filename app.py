@@ -17,18 +17,22 @@ import gdown
 
 def download_model():
     url = "https://drive.google.com/uc?id=1rtxHkF5zr6nuqOwVGkcZwDowgArZnhLH"
-    output = "/tmp/model.h5"
-    if not os.path.exists(output):  # Kiểm tra xem file đã tồn tại chưa
+    
+    # Sử dụng thư mục tmp trong thư mục dự án (hợp lệ trên Windows)
+    output = "./tmp/model.h5"
+
+    if not os.path.exists(output):  # Kiểm tra nếu tệp chưa tồn tại
         print("Downloading model...")
+        os.makedirs(os.path.dirname(output), exist_ok=True)  # Tạo thư mục nếu chưa có
         gdown.download(url, output, quiet=False)
         print("Model downloaded successfully!")
     else:
         print("Model already exists.")
 
-    # Kiểm tra kích thước file sau khi tải xong
+    # Kiểm tra kích thước tệp
     if os.path.exists(output):
         print(f"Downloaded file size: {os.path.getsize(output)} bytes")
-
+    return output
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -338,8 +342,8 @@ def admin_dashboard():
 # Thay đổi trong phần khởi động ứng dụng
 if __name__ == "__main__":
     try:
-        download_model()  # Tải xuống mô hình trước
-        model = load_model("model.h5", custom_objects={"KerasLayer": hub.KerasLayer})  # Tải mô hình sau khi tải xuống
+        model_path = download_model()  # Nhận đường dẫn model
+        model = load_model(model_path, custom_objects={"KerasLayer": hub.KerasLayer})  # Load model từ đường dẫn
         print("Model loaded successfully!")
     except Exception as e:
         print(f"Error initializing the application: {e}")
@@ -347,6 +351,7 @@ if __name__ == "__main__":
 
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
 
 
 
