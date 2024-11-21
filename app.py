@@ -17,7 +17,7 @@ import gdown
 
 def download_model():
     url = "https://drive.google.com/uc?id=1rtxHkF5zr6nuqOwVGkcZwDowgArZnhLH"
-    output = "model.h5"
+    output = "/tmp/model.h5"
     if not os.path.exists(output):  # Kiểm tra xem file đã tồn tại chưa
         print("Downloading model...")
         gdown.download(url, output, quiet=False)
