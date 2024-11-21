@@ -1,5 +1,5 @@
 build:
   command: pip install --upgrade pip && pip install -r requirements.txt
 runtime: python
-pythonVersion: 3.8
+pythonVersion: 3.9
 
