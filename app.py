@@ -14,16 +14,32 @@ from datetime import datetime
 import os
 import requests
 import gdown
+import platform
+
+# Thêm import platform
+import platform
+
+def get_temp_folder():
+    """
+    Trả về đường dẫn thư mục tạm tùy thuộc vào hệ điều hành.
+    """
+    if platform.system() == "Windows":
+        temp_folder = os.path.join(os.getcwd(), ".tmp")  # Local Windows sử dụng .tmp
+    else:
+        temp_folder = "/tmp"  # Render sử dụng /tmp
+    os.makedirs(temp_folder, exist_ok=True)  # Tạo thư mục nếu chưa tồn tại
+    return temp_folder
 
 def download_model():
+    """
+    Tải xuống mô hình từ Google Drive nếu nó chưa tồn tại trong thư mục tạm.
+    """
     url = "https://drive.google.com/uc?id=1rtxHkF5zr6nuqOwVGkcZwDowgArZnhLH"
-    
-    # Sử dụng thư mục tmp trong thư mục dự án (hợp lệ trên Windows)
-    output = "./tmp/model.h5"
+    temp_folder = get_temp_folder()
+    output = os.path.join(temp_folder, "model.h5")
 
     if not os.path.exists(output):  # Kiểm tra nếu tệp chưa tồn tại
         print("Downloading model...")
-        os.makedirs(os.path.dirname(output), exist_ok=True)  # Tạo thư mục nếu chưa có
         gdown.download(url, output, quiet=False)
         print("Model downloaded successfully!")
     else:
@@ -33,6 +49,7 @@ def download_model():
     if os.path.exists(output):
         print(f"Downloaded file size: {os.path.getsize(output)} bytes")
     return output
+
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
