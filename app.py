@@ -16,9 +16,6 @@ import requests
 import gdown
 import platform
 
-# Thêm import platform
-import platform
-
 def get_temp_folder():
     """
     Trả về đường dẫn thư mục tạm tùy thuộc vào hệ điều hành.
