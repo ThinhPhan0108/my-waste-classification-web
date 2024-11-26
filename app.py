@@ -14,7 +14,6 @@ from datetime import datetime
 import os
 import requests
 
-<<<<<<< HEAD
 # Phân loại nhóm khả năng xử lý
 waste_categories = {
     "recyclable": ["paper", "plastic", "metal", "brown-glass", "green-glass", "white-glass", "cardboard"],
@@ -39,38 +38,6 @@ def get_recyclability(waste_type):
             elif category == "special":
                 return "Đặc biệt"
     return "Không xác định"
-=======
-def get_temp_folder():
-    """
-    Trả về đường dẫn thư mục tạm tùy thuộc vào hệ điều hành.
-    """
-    if platform.system() == "Windows":
-        temp_folder = os.path.join(os.getcwd(), ".tmp")  # Local Windows sử dụng .tmp
-    else:
-        temp_folder = "/tmp"  # Render sử dụng /tmp
-    os.makedirs(temp_folder, exist_ok=True)  # Tạo thư mục nếu chưa tồn tại
-    return temp_folder
-
-def download_model():
-    """
-    Tải xuống mô hình từ Google Drive nếu nó chưa tồn tại trong thư mục tạm.
-    """
-    url = "https://drive.google.com/uc?id=1rtxHkF5zr6nuqOwVGkcZwDowgArZnhLH"
-    temp_folder = get_temp_folder()
-    output = os.path.join(temp_folder, "model.h5")
-
-    if not os.path.exists(output):  # Kiểm tra nếu tệp chưa tồn tại
-        print("Downloading model...")
-        gdown.download(url, output, quiet=False)
-        print("Model downloaded successfully!")
-    else:
-        print("Model already exists.")
-
-    # Kiểm tra kích thước tệp
-    if os.path.exists(output):
-        print(f"Downloaded file size: {os.path.getsize(output)} bytes")
-    return output
->>>>>>> e3bc7efeaec6d2e46832cdf998face8292fc2709
 
 # Mô tả chi tiết cho khả năng xử lý rác
 recyclability_descriptions = {
@@ -116,16 +83,17 @@ with app.app_context():
     db.create_all()
 
 # Load Model
-def load_model(model_path, custom_objects=None):
+def load_model(model_path):
     try:
-        model = tf.keras.models.load_model(model_path, custom_objects=custom_objects)
+        # Không sử dụng KerasLayer từ TensorFlow Hub
+        model = tf.keras.models.load_model(model_path, custom_objects={"KerasLayer": hub.KerasLayer})
         logging.info("Model loaded successfully!")
         return model
     except Exception as e:
         logging.error(f"Error loading model: {e}")
         return None
 
-model = load_model("model.h5", custom_objects={"KerasLayer": hub.KerasLayer})
+model = load_model("model.h5")
 
 waste_types = {
     0: 'battery',
@@ -403,9 +371,7 @@ def admin_dashboard():
 # Thay đổi trong phần khởi động ứng dụng
 if __name__ == "__main__":
     try:
-        # Sửa lại model_path để chỉ đường dẫn file model trong thư mục gốc
-        model_path = "model.h5"
-        model = load_model(model_path, custom_objects={"KerasLayer": hub.KerasLayer})  # Load model từ đường dẫn
+        model = load_model("model.h5")  # Load model từ file model.h5 có sẵn
         print("Model loaded successfully!")
     except Exception as e:
         print(f"Error initializing the application: {e}")
@@ -413,6 +379,7 @@ if __name__ == "__main__":
 
     port = int(os.environ.get("PORT", 80))
     app.run(host="0.0.0.0", port=port)
+
 
 
 

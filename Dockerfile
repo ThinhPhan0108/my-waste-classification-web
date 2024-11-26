@@ -1,23 +1,34 @@
-# Sử dụng Python 3.8 slim
-FROM python:3.8-slim
 
-# Thiết lập thư mục làm việc
+# Use Python 3.8.20 slim base image
+FROM python:3.8.20-slim
+
+# Set working directory
 WORKDIR /app
 
-# Cài đặt các dependencies cần thiết, bao gồm build-essential và python3-distutils
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     python3-distutils \
+    libc-dev \
+    zlib1g-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libopenblas-dev \
+    liblapack-dev \
+    git \
     && apt-get clean
 
-# Sao chép toàn bộ file từ project vào container
+# Copy the project files
 COPY . /app
 
-# Cài đặt các thư viện Python
+# Upgrade pip to avoid compatibility issues
+RUN pip install --upgrade pip
+
+# Install Python dependencies from the updated requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose cổng 80 để Render có thể kết nối
+# Expose port 80 for external connections
 EXPOSE 80
 
-# Chạy ứng dụng Flask
+# Run the Flask application
 CMD ["python", "app.py"]
