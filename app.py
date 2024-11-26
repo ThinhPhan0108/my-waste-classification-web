@@ -14,6 +14,7 @@ from datetime import datetime
 import os
 import requests
 
+<<<<<<< HEAD
 # Phân loại nhóm khả năng xử lý
 waste_categories = {
     "recyclable": ["paper", "plastic", "metal", "brown-glass", "green-glass", "white-glass", "cardboard"],
@@ -38,6 +39,38 @@ def get_recyclability(waste_type):
             elif category == "special":
                 return "Đặc biệt"
     return "Không xác định"
+=======
+def get_temp_folder():
+    """
+    Trả về đường dẫn thư mục tạm tùy thuộc vào hệ điều hành.
+    """
+    if platform.system() == "Windows":
+        temp_folder = os.path.join(os.getcwd(), ".tmp")  # Local Windows sử dụng .tmp
+    else:
+        temp_folder = "/tmp"  # Render sử dụng /tmp
+    os.makedirs(temp_folder, exist_ok=True)  # Tạo thư mục nếu chưa tồn tại
+    return temp_folder
+
+def download_model():
+    """
+    Tải xuống mô hình từ Google Drive nếu nó chưa tồn tại trong thư mục tạm.
+    """
+    url = "https://drive.google.com/uc?id=1rtxHkF5zr6nuqOwVGkcZwDowgArZnhLH"
+    temp_folder = get_temp_folder()
+    output = os.path.join(temp_folder, "model.h5")
+
+    if not os.path.exists(output):  # Kiểm tra nếu tệp chưa tồn tại
+        print("Downloading model...")
+        gdown.download(url, output, quiet=False)
+        print("Model downloaded successfully!")
+    else:
+        print("Model already exists.")
+
+    # Kiểm tra kích thước tệp
+    if os.path.exists(output):
+        print(f"Downloaded file size: {os.path.getsize(output)} bytes")
+    return output
+>>>>>>> e3bc7efeaec6d2e46832cdf998face8292fc2709
 
 # Mô tả chi tiết cho khả năng xử lý rác
 recyclability_descriptions = {
