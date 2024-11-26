@@ -1,23 +1,41 @@
 {% extends "base.html" %}
 {% block title %}Bảng Xếp Hạng{% endblock %}
 {% block content %}
-<div class="container mt-5">
-    <h1 class="text-center text-success">Bảng Xếp Hạng</h1>
-    <table class="table table-bordered mt-4">
-        <thead class="bg-primary text-white">
-            <tr>
-                <th>Username</th>
-                <th>Points</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-            <tr>
-                <td>{{ user.username }}</td>
-                <td>{{ user.points }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="container mt-5" style="font-family: 'Poppins', sans-serif;">
+
+    <!-- Tiêu đề -->
+    <h1 class="text-center text-success mb-4" style="font-weight: 600;">Bảng Xếp Hạng</h1>
+
+    <!-- Bảng xếp hạng -->
+    <div class="table-responsive">
+        <table class="table table-hover text-center shadow-sm" style="background-color: #f8f9fa; border-radius: 8px;">
+            <thead class="bg-primary text-white" style="font-size: 1.1rem; font-weight: 600;">
+                <tr>
+                    <th>Thứ hạng</th>
+                    <th>Username</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr class="{% if loop.index == 1 %}top-1{% elif loop.index == 2 %}top-2{% elif loop.index == 3 %}top-3{% endif %}" style="transition: background-color 0.3s;">
+                    <td>
+                        {% if loop.index == 1 %}
+                        <div class="medal gold">1</div> <!-- Huy chương vàng với số 1 -->
+                        {% elif loop.index == 2 %}
+                        <div class="medal silver">2</div> <!-- Huy chương bạc với số 2 -->
+                        {% elif loop.index == 3 %}
+                        <div class="medal bronze">3</div> <!-- Huy chương đồng với số 3 -->
+                        {% else %}
+                        {{ loop.index }}
+                        {% endif %}
+                    </td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.points }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

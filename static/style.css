@@ -55,3 +55,153 @@ h1 {
 .footer a.footer-link:hover {
     text-decoration: underline;
 }
+
+/* Định dạng huy chương */
+.medal {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 0 auto;
+}
+
+/* Màu sắc huy chương */
+.gold {
+    background-color: #FFD700; /* Vàng */
+    box-shadow: 0px 4px 8px rgba(255, 215, 0, 0.6);
+}
+
+.silver {
+    background-color: #C0C0C0; /* Bạc */
+    box-shadow: 0px 4px 8px rgba(192, 192, 192, 0.6);
+}
+
+.bronze {
+    background-color: #CD7F32; /* Đồng */
+    box-shadow: 0px 4px 8px rgba(205, 127, 50, 0.6);
+}
+
+/* Bảng xếp hạng */
+.table-hover tbody tr:hover {
+    background-color: #eaf5fc;
+    cursor: pointer;
+}
+
+/* Highlight top 1 */
+tbody tr.top-1 {
+    font-weight: bold;
+    background-color: #fffbea; /* Vàng nhạt */
+}
+
+tbody tr.top-2 {
+    font-weight: bold;
+    background-color: #f4f4f4; /* Bạc nhạt */
+}
+
+tbody tr.top-3 {
+    font-weight: bold;
+    background-color: #fff0e6; /* Đồng nhạt */
+}
+/* Bảng lịch sử */
+.table-hover tbody tr:hover {
+    background-color: #f1f5f9;
+    cursor: pointer;
+}
+
+.table-hover th, .table-hover td {
+    vertical-align: middle;
+}
+
+/* Tạo khoảng cách trong bảng */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+/* Hiển thị bóng */
+.table {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Định dạng ô tiêu đề */
+.table thead th {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Định dạng nội dung */
+.table tbody td {
+    font-size: 0.95rem;
+    font-weight: normal;
+}
+/* Định dạng nút Đăng xuất */
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Footer */
+.footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer a.footer-link {
+    color: #ffdd57;
+    text-decoration: none;
+}
+
+.footer a.footer-link:hover {
+    text-decoration: underline;
+}
+/* Nút quay lại */
+.btn-primary {
+    font-weight: bold;
+    background-color: #007bff;
+    border: none;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+/* Bảng */
+.table-hover tbody tr:hover {
+    background-color: #f1f5f9;
+    cursor: pointer;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.table thead th {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+/* Card */
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header của card */
+.card-header {
+    font-size: 1.25rem;
+    font-weight: bold;
+}

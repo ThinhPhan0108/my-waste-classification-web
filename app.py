@@ -13,43 +13,40 @@ import base64
 from datetime import datetime
 import os
 import requests
-import gdown
-import platform
 
-# Thêm import platform
-import platform
+# Phân loại nhóm khả năng xử lý
+waste_categories = {
+    "recyclable": ["paper", "plastic", "metal", "brown-glass", "green-glass", "white-glass", "cardboard"],
+    "organic": ["biological"],
+    "non_recyclable": ["trash", "shoes"],
+    "hazardous": ["battery"],
+    "special": ["clothes"]
+}
 
-def get_temp_folder():
-    """
-    Trả về đường dẫn thư mục tạm tùy thuộc vào hệ điều hành.
-    """
-    if platform.system() == "Windows":
-        temp_folder = os.path.join(os.getcwd(), ".tmp")  # Local Windows sử dụng .tmp
-    else:
-        temp_folder = "/tmp"  # Render sử dụng /tmp
-    os.makedirs(temp_folder, exist_ok=True)  # Tạo thư mục nếu chưa tồn tại
-    return temp_folder
+# Hàm xác định nhóm khả năng xử lý
+def get_recyclability(waste_type):
+    for category, items in waste_categories.items():
+        if waste_type in items:
+            if category == "recyclable":
+                return "Có thể tái chế"
+            elif category == "organic":
+                return "Hữu cơ"
+            elif category == "non_recyclable":
+                return "Không tái chế được"
+            elif category == "hazardous":
+                return "Nguy hại"
+            elif category == "special":
+                return "Đặc biệt"
+    return "Không xác định"
 
-def download_model():
-    """
-    Tải xuống mô hình từ Google Drive nếu nó chưa tồn tại trong thư mục tạm.
-    """
-    url = "https://drive.google.com/uc?id=1rtxHkF5zr6nuqOwVGkcZwDowgArZnhLH"
-    temp_folder = get_temp_folder()
-    output = os.path.join(temp_folder, "model.h5")
-
-    if not os.path.exists(output):  # Kiểm tra nếu tệp chưa tồn tại
-        print("Downloading model...")
-        gdown.download(url, output, quiet=False)
-        print("Model downloaded successfully!")
-    else:
-        print("Model already exists.")
-
-    # Kiểm tra kích thước tệp
-    if os.path.exists(output):
-        print(f"Downloaded file size: {os.path.getsize(output)} bytes")
-    return output
-
+# Mô tả chi tiết cho khả năng xử lý rác
+recyclability_descriptions = {
+    "Có thể tái chế": "Các loại rác như giấy, nhựa, kim loại và thủy tinh có thể tái chế để sử dụng lại. Phân loại đúng sẽ giúp bảo vệ môi trường.",
+    "Hữu cơ": "Rác hữu cơ bao gồm thức ăn thừa, rau củ và các vật liệu phân hủy sinh học. Loại rác này có thể dùng để làm phân hữu cơ.",
+    "Không tái chế được": "Các loại rác như túi nilon, hộp xốp và giày dép không thể tái chế được. Cần giảm thiểu việc sử dụng loại rác này.",
+    "Nguy hại": "Pin, hóa chất và các loại rác độc hại cần được xử lý đặc biệt để tránh gây hại cho môi trường và sức khỏe.",
+    "Đặc biệt": "Quần áo cũ và các vật dụng tương tự có thể được quyên góp hoặc tái sử dụng thay vì vứt bỏ."
+}
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -221,6 +218,7 @@ def upload_image():
         # Xử lý ảnh chụp từ camera (Base64)
         captured_image = request.form.get('captured_image')
         if captured_image:
+            print("Ảnh từ camera nhận được!")
             try:
                 # Decode Base64 và lưu file
                 image_data = base64.b64decode(captured_image.split(',')[1])
@@ -228,6 +226,7 @@ def upload_image():
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 with open(filepath, "wb") as f:
                     f.write(image_data)
+                print(f"Ảnh đã được lưu tại: {filepath}")
 
                 # Chuyển file sang static/uploads để sử dụng trên giao diện web
                 static_path = os.path.join('static', 'uploads', filename)
@@ -237,6 +236,7 @@ def upload_image():
 
                 # Phân loại ảnh
                 result = classify_image(static_path)
+                print(f"Kết quả phân loại: {result}")
 
                 if result:
                     # Cộng điểm cho người dùng
@@ -256,6 +256,9 @@ def upload_image():
                     recycle_centers = waste_details.get("recycle_centers", [])
 
                     # Trả về kết quả
+                    recyclability = get_recyclability(result)  # Xác định khả năng xử lý
+                    recyclability_description = recyclability_descriptions.get(recyclability, "Không có thông tin chi tiết.")  # Lấy mô tả chi tiết
+
                     return render_template(
                         'result.html',
                         result=result,
@@ -264,6 +267,8 @@ def upload_image():
                         tips=tips,
                         recycle_centers=recycle_centers,
                         image_url=url_for('static', filename=f'uploads/{filename}'),
+                        recyclability=recyclability,  # Truyền khả năng xử lý vào template
+                        recyclability_description=recyclability_description,
                         is_admin=is_admin
                     )
                 else:
@@ -305,6 +310,10 @@ def upload_image():
                 environmental_impact = waste_details.get("environmental_impact", "Không có thông tin về tác động môi trường.")
                 tips = waste_details.get("tips", "Không có mẹo xử lý.")
                 recycle_centers = waste_details.get("recycle_centers", [])
+                
+                recyclability = get_recyclability(result)  # Xác định khả năng xử lý từ loại rác
+                print(f"Khả năng xử lý: {recyclability}")
+                recyclability_description = recyclability_descriptions.get(recyclability, "Không có thông tin chi tiết.")  # Lấy mô tả chi tiết
 
                 # Trả về kết quả
                 return render_template(
@@ -315,6 +324,8 @@ def upload_image():
                     tips=tips,
                     recycle_centers=recycle_centers,
                     image_url=url_for('static', filename=f'uploads/{filename}'),
+                    recyclability=recyclability,  # Truyền khả năng xử lý vào template
+                    recyclability_description=recyclability_description,
                     is_admin=is_admin
                 )
             else:
@@ -359,15 +370,17 @@ def admin_dashboard():
 # Thay đổi trong phần khởi động ứng dụng
 if __name__ == "__main__":
     try:
-        model_path = download_model()  # Nhận đường dẫn model
+        # Sửa lại model_path để chỉ đường dẫn file model trong thư mục gốc
+        model_path = "model.h5"
         model = load_model(model_path, custom_objects={"KerasLayer": hub.KerasLayer})  # Load model từ đường dẫn
         print("Model loaded successfully!")
     except Exception as e:
         print(f"Error initializing the application: {e}")
         exit(1)
 
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 80))
     app.run(host="0.0.0.0", port=port)
+
 
 
 

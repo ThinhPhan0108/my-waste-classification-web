@@ -1,29 +1,69 @@
 {% extends "base.html" %}
 {% block title %}Kết Quả Phân Loại{% endblock %}
 {% block content %}
-<div class="container mt-5">
-    <h1 class="text-center text-primary">Kết quả phân loại</h1>
-    <p class="text-center fs-4">Loại rác: <strong>{{ result }}</strong></p>
-    <div class="text-center">
-        <img src="{{ image_url }}" alt="Uploaded Image" class="img-fluid mt-4" style="max-width: 300px;">
-    </div>
-    
-    <!-- Hiển thị thông tin chi tiết -->
-    <div class="mt-4">
-        <h2 class="text-center text-success">Thông tin chi tiết:</h2>
-        <p class="text-center fs-5"><strong>Mô tả:</strong> {{ description }}</p>
-        <p class="text-center fs-5"><strong>Tác động môi trường:</strong> {{ environmental_impact }}</p>
-        <p class="text-center fs-5"><strong>Mẹo xử lý:</strong> {{ tips }}</p>
+<!-- Import Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Container chính -->
+<div class="container mt-5 text-center" style="font-family: 'Poppins', sans-serif;">
+
+    <!-- Tiêu đề -->
+    <h1 class="text-primary mb-4" style="font-weight: 600; font-size: 2.2rem;">Kết quả phân loại</h1>
+
+    <!-- Thông tin cơ bản -->
+    <p class="fs-5" style="font-weight: 500; font-size: 1.2rem; color: #333;">
+        <strong>Loại rác:</strong> {{ result }}
+    </p>
+    <p class="fs-5" style="font-weight: 500; font-size: 1.2rem; color: #333;">
+        <strong>Khả năng xử lý:</strong> <span class="text-success">{{ recyclability }}</span>
+    </p>
+
+    <!-- Hình ảnh -->
+    <div class="text-center mb-4">
+        <img src="{{ image_url }}" alt="Uploaded Image" class="img-fluid mt-4 shadow-lg rounded" 
+             style="max-width: 300px; border: 3px solid #ddd; padding: 10px; background-color: white;">
     </div>
 
-    <!-- Hiển thị các trung tâm thu gom -->
-    <div class="mt-4">
-        <h3 class="text-center text-info">Trạm thu gom gần bạn:</h3>
-        <ul class="list-group">
-            {% for center in recycle_centers %}
-                <li class="list-group-item">{{ center }}</li>
-            {% endfor %}
-        </ul>
+    <!-- Nút hiển thị chi tiết -->
+    <div class="text-center mb-3">
+        <button class="btn btn-outline-primary px-4 py-2" id="toggleDetails" style="font-weight: 500; font-size: 1rem;">
+            Xem Chi Tiết
+        </button>
+    </div>
+
+    <!-- Nút Tiếp tục phân loại -->
+    <div class="text-center mt-3">
+        <a href="/" class="btn btn-success px-4 py-2" style="font-weight: 500; font-size: 1rem;">Tiếp tục phân loại</a>
+    </div>
+
+    <!-- Phần thông tin chi tiết -->
+    <div id="details" class="mt-4 mx-auto" 
+         style="display: none; padding: 20px; border: 1px solid #ddd; border-radius: 8px; 
+                background-color: #f0f8f0; max-width: 600px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <h2 class="text-center" style="color: #5c8a5c; font-weight: 600; font-size: 1.5rem;">Thông tin chi tiết:</h2>
+        <p class="text-start" style="font-weight: 400; font-size: 1rem; color: #5c8a5c;">
+            <strong>Mô tả:</strong> {{ description }}
+        </p>
+        <p class="text-start" style="font-weight: 400; font-size: 1rem; color: #5c8a5c;">
+            <strong>Tác động môi trường:</strong> {{ environmental_impact }}
+        </p>
+        <p class="text-start" style="font-weight: 400; font-size: 1rem; color: #5c8a5c;">
+            <strong>Mẹo xử lý:</strong> {{ tips }}
+        </p>
     </div>
 </div>
+
+<!-- Script toggle -->
+<script>
+    document.getElementById('toggleDetails').addEventListener('click', function() {
+        const details = document.getElementById('details');
+        if (details.style.display === 'none') {
+            details.style.display = 'block';
+            this.textContent = 'Ẩn Chi Tiết';
+        } else {
+            details.style.display = 'none';
+            this.textContent = 'Xem Chi Tiết';
+        }
+    });
+</script>
 {% endblock %}
