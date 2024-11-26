@@ -9,7 +9,7 @@ A user-friendly web application for waste classification, powered by a trained T
 - **History:** View user activity history.
 
 ## Requirements
-- Python 3.10
+- Python 3.8.20
 - TensorFlow, Flask, SQLAlchemy, and other dependencies listed in `requirements.txt`
 
 ## Installation
