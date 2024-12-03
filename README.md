@@ -13,7 +13,7 @@ A user-friendly web application for waste classification, powered by a trained T
 - TensorFlow, Flask, SQLAlchemy, and other dependencies listed in `requirements.txt`
 
 ## Installation
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/ThinhPhan0108/my-waste-classification-web.git
 2. **Navigate to the project directory:**
@@ -33,7 +33,7 @@ A user-friendly web application for waste classification, powered by a trained T
 4. **Install the required dependencies:**
    ```bash
    pip install -r requirements.txt
-5. ***Run the application:***
+5. **Run the application:**
    ```bash
    python app.py
    
