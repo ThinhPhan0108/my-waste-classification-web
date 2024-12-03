@@ -19,6 +19,17 @@ A user-friendly web application for waste classification, powered by a trained T
 2. **Navigate to the project directory:**
    ```bash
    cd my-waste-classification-web
+3. **Download the model file:**
+   - Click on the following [Google Drive link](https://drive.google.com/file/d/1rtxHkF5zr6nuqOwVGkcZwDowgArZnhLH/view?usp=sharing) to download the pre-trained TensorFlow model file.
+   - Once the model is downloaded, move the model file to the **root directory** of the project, where your `app.py` file is located.
+   - After moving the model, the path to the file should look something like this:
+     ```
+     /my-waste-classification-web/
+       ├── app.py
+       ├── model_file.h5  (your downloaded model)
+       └── other files...
+     ```
+   - Now, you are ready to run the application with the pre-trained model loaded.
 4. **Install the required dependencies:**
    ```bash
    pip install -r requirements.txt
