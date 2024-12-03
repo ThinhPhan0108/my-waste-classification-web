@@ -26,7 +26,7 @@ A user-friendly web application for waste classification, powered by a trained T
      ```
      /my-waste-classification-web/
        ├── app.py
-       ├── model_file.h5  (your downloaded model)
+       ├── model.h5  (your downloaded model)
        └── other files...
      ```
    - Now, you are ready to run the application with the pre-trained model loaded.
