@@ -2,6 +2,9 @@
 
 A user-friendly web application for waste classification, powered by a trained TensorFlow deep learning model. Users can upload images of waste items, and the app will predict the type of waste (e.g., paper, plastic, metal, glass, and others).
 
+## Demo Video
+[Watch the demo here]([https://www.youtube.com/watch?v=YOUR_VIDEO_LINK](https://www.youtube.com/watch?v=BdZPwzesCuI))
+
 ## Features
 - **Upload Waste Images:** Users can upload images, and the app will classify them into predefined waste categories.
 - **Leaderboard:** Track user points based on successful classifications.
