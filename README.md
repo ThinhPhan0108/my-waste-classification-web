@@ -1,4 +1,4 @@
-# My Waste Classification Web
+# Waste Classification Web
 
 A user-friendly web application that leverages a Swin Transformer model for accurate waste classification. Users can upload images of waste items, and the app accurately predicts the waste type, such as paper, plastic, metal, or glass.
 
